@@ -1,10 +1,10 @@
 # dastal - 📚 Data Structures & Algorithms in Java
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/phortran/dastal/gradle.yml?branch=main)](https://github.com/phortran/dastal/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Panopticode/dastal/gradle.yml?branch=main)](https://github.com/Panopticode/dastal/actions)
 [![Java Version](https://img.shields.io/badge/java-21%2B-blue.svg)](https://jdk.java.net/21/)
 [![Gradle](https://img.shields.io/badge/build-tool-gradle-02303A.svg?logo=gradle)](https://gradle.org/)
 [![License](https://img.shields.io/github/license/phortran/dastal.svg)](LICENCE)
-[![Coverage](https://img.shields.io/codecov/c/github/phortran/dastal?token=YOUR_TOKEN_HERE)](https://codecov.io/gh/phortran/dastal)
+[![Coverage](https://img.shields.io/codecov/c/github/Panopticode/dastal?token=YOUR_TOKEN_HERE)](https://codecov.io/gh/phortran/dastal)
 
 ---
 
@@ -62,9 +62,9 @@ dastal/
 └── LICENCE
 ```
 
-🚀## Getting Started
-🔧
-### Prerequisites
+## 🚀 Getting Started
+
+### 🔧 Prerequisites
 
 * [Java 21+](https://jdk.java.net/21/)
 * [Gradle](https://gradle.org/install/) (optional — project includes Gradle Wrapper)
@@ -77,20 +77,20 @@ cd dastal
 ./gradlew build
 ```
 
-🧪## Run Tests
+## 🧪 Run Tests
 
 ```bash
 ./gradlew test
 ```
 
-📌## Usage
+## 📌 Usage
 
 * Browse through `src/main/java` to explore implementations.
 * Visit `problems/hackerrank/` and `problems/leetcode/` directories for coding challenge solutions.
 * Corresponding unit tests are under `src/test/java`.
 * Modify or extend any implementation and rerun the tests to validate changes.
 
-🤝## Contributing
+## 🤝 Contributing
 Contributions are very welcome! If you have optimizations, new problems, or improvements:
 
 1. Fork the project.
@@ -114,10 +114,10 @@ git push origin feature/YourFeature
 
 5. Open a pull request.
 
-📜## Licence
+## 📜 Licence
 This project is licenced under the [MIT Licence](https://www.mit.edu/~amini/LICENSE.md).
 
-📣## Acknowledgments
+## 📣 Acknowledgments
 
 * [HackerRank](https://www.hackerrank.com)
 * [LeetCode](https://leetcode.com)
