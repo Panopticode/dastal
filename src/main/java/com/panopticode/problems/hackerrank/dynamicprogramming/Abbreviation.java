@@ -1,5 +1,7 @@
 package com.panopticode.problems.hackerrank.dynamicprogramming;
 
+import com.panopticode.utils.Printer;
+
 import static java.lang.Character.isUpperCase;
 import static java.lang.Character.toUpperCase;
 
@@ -23,6 +25,7 @@ import static java.lang.Character.toUpperCase;
  * </ol>
  */
 public class Abbreviation {
+    private static boolean debug =  false;
     /*
      * Complete the 'abbreviation' function below.
      *
@@ -35,9 +38,16 @@ public class Abbreviation {
     public static String abbreviation(String a, String b) {
         // a couple optimisations
         if (a.length() < b.length()) {
+            if (debug) {
+                System.out.println("Optimisation: cannot generate b from a since b is longer than a");
+            }
             return "NO";
         }
         if (a.length() == b.length()) {
+            if (debug) {
+                System.out.println("Optimisation: b can be generated from a only if they have the same characters (case insensitive) " +
+                        "since they have the same length");
+            }
             return a.equalsIgnoreCase(b) ? "YES" : "NO";
         }
 
@@ -61,6 +71,15 @@ public class Abbreviation {
                 }
             }
         }
+
+        if (debug) {
+            Printer.printTable(boolMatrix, false, ("*" + b).split(""), ("*" + a).split(""));
+        }
+
         return boolMatrix[a.length()][b.length()] ? "YES" : "NO";
+    }
+
+    public static void setDebug(final boolean debug) {
+        Abbreviation.debug = debug;
     }
 }
