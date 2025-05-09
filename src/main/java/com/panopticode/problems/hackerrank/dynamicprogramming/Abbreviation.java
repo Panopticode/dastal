@@ -54,6 +54,8 @@ public class Abbreviation {
         var boolMatrix = new boolean[a.length() + 1][b.length() + 1];
         var lowerCase = true;
         boolMatrix[0][0] = true;
+        // initialise first column, tantamount to matching against empty string
+        // ie matching until first uppercase character is found
         for (int i = 1; i <= a.length(); ++i) {
             if (isUpperCase(a.charAt(i - 1))) {
                 lowerCase = false;
@@ -65,8 +67,10 @@ public class Abbreviation {
         for (int j = 1; j <= b.length(); ++j) {
             for (int i = 1; i <= a.length(); ++i) {
                 if (!boolMatrix[i - 1][j] || isUpperCase(a.charAt(i - 1))) {
+                    //                 last transf by matching  AND  I have a further match (ie a_k is lwc but up(a_k) == b_z OR a_k is upc and a_k == b_z)
                     boolMatrix[i][j] = (boolMatrix[i - 1][j - 1] && toUpperCase(a.charAt(i - 1)) == b.charAt(j - 1));
                 } else {
+                    // last transf by eliminating AND character can be eliminated
                     boolMatrix[i][j] = true;
                 }
             }
