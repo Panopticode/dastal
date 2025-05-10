@@ -22,6 +22,23 @@ public final class Printer {
         printTable(objTable, justifyRight, headers, rowHeaders);
     }
 
+    public static void printTable(int[][] table, boolean justifyRight) {
+        printTable(table, justifyRight, null, null);
+    }
+
+    public static void printTable(int[][] table, boolean justifyRight, String[] headers, String[] rowHeaders) {
+        var objTable = new String[table.length][table[0].length];
+
+        for (var row = 0; row < table.length; ++row) {
+            int[] r = table[row];
+            for (var col = 0; col < r.length; ++col) {
+                objTable[row][col] = String.format("%d", r[col]);
+            }
+        }
+
+        printTable(objTable, justifyRight, headers, rowHeaders);
+    }
+
     public static <T> void printTable(T[][] table, boolean justifyRight) {
         printTable(table, justifyRight, null, null);
     }
