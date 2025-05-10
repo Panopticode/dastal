@@ -31,6 +31,26 @@ public class PrinterTest {
     }
 
     @Test
+    public void printTableIntTypes() {
+        var table = generateRandomIntTable(5, 3);
+
+        Printer.printTable(table, false);
+    }
+
+    @Test
+    public void printTableIntTypesWithHeaders() {
+        var table = generateRandomIntTable(5, 3);
+        var headers = new String[]{
+                "A", "B", "C"
+        };
+        var rowHeaders = new String[]{
+                "1", "2", "3", "4", "5"
+        };
+
+        Printer.printTable(table, false, headers, rowHeaders);
+    }
+
+    @Test
     public void printTableWithHeaders() {
         var table = generateRandomStringTable(5, 3);
         var headers = new String[]{
@@ -88,6 +108,17 @@ public class PrinterTest {
                 table[i][j] = Math.random() < 0.5;
             }
         }
+        return table;
+    }
+
+    private static int[][] generateRandomIntTable(int rows, int cols) {
+        int[][] table = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                table[i][j] = (int) (Math.random() * 100);
+            }
+        }
+
         return table;
     }
 }

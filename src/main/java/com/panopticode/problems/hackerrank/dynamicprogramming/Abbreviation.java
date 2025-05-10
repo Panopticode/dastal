@@ -1,5 +1,6 @@
 package com.panopticode.problems.hackerrank.dynamicprogramming;
 
+import com.panopticode.utils.OneIdxString;
 import com.panopticode.utils.Printer;
 
 import static java.lang.Character.isUpperCase;
@@ -35,15 +36,19 @@ public class Abbreviation {
      *  2. STRING b
      */
 
-    public static String abbreviation(String a, String b) {
+    public static String abbreviation(final String a,
+                                      final String b) {
+        var x = new OneIdxString(a);
+        var y = new OneIdxString(b);
+
         // a couple optimisations
-        if (a.length() < b.length()) {
+        if (x.length < y.length) {
             if (debug) {
                 System.out.println("Optimisation: cannot generate b from a since b is longer than a");
             }
             return "NO";
         }
-        if (a.length() == b.length()) {
+        if (x.length == y.length) {
             if (debug) {
                 System.out.println("Optimisation: b can be generated from a only if they have the same characters (case insensitive) " +
                         "since they have the same length");
@@ -51,22 +56,26 @@ public class Abbreviation {
             return a.equalsIgnoreCase(b) ? "YES" : "NO";
         }
 
-        var boolMatrix = new boolean[a.length() + 1][b.length() + 1];
+        var boolMatrix = new boolean[x.length + 1][y.length + 1];
         var lowerCase = true;
         boolMatrix[0][0] = true;
-        for (int i = 1; i <= a.length(); ++i) {
-            if (isUpperCase(a.charAt(i - 1))) {
+        // initialise first column, tantamount to matching against empty string
+        // ie matching until first uppercase character is found
+        for (int i = 1; i <= x.length; ++i) {
+            if (isUpperCase(x.at(i))) {
                 lowerCase = false;
             }
             if (lowerCase) {
                 boolMatrix[i][0] = true;
             }
         }
-        for (int j = 1; j <= b.length(); ++j) {
-            for (int i = 1; i <= a.length(); ++i) {
-                if (!boolMatrix[i - 1][j] || isUpperCase(a.charAt(i - 1))) {
-                    boolMatrix[i][j] = (boolMatrix[i - 1][j - 1] && toUpperCase(a.charAt(i - 1)) == b.charAt(j - 1));
+        for (int j = 1; j <= y.length; ++j) {
+            for (int i = 1; i <= x.length; ++i) {
+                if (!boolMatrix[i - 1][j] || isUpperCase(x.at(i))) {
+                    //                 last transf by matching  AND  I have a further match (ie a_k is lwc but up(a_k) == b_z OR a_k is upc and a_k == b_z)
+                    boolMatrix[i][j] = (boolMatrix[i - 1][j - 1] && toUpperCase(x.at(i)) == y.at(j));
                 } else {
+                    // last transf by eliminating AND character can be eliminated
                     boolMatrix[i][j] = true;
                 }
             }
@@ -76,7 +85,7 @@ public class Abbreviation {
             Printer.printTable(boolMatrix, false, ("*" + b).split(""), ("*" + a).split(""));
         }
 
-        return boolMatrix[a.length()][b.length()] ? "YES" : "NO";
+        return boolMatrix[x.length][y.length] ? "YES" : "NO";
     }
 
     public static void setDebug(final boolean debug) {

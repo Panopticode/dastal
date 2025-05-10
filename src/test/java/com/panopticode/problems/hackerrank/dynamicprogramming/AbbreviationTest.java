@@ -28,6 +28,8 @@ public class AbbreviationTest {
                 { "sYOCa", "YOCN", false },
                 { "JHMWY", "HUVPW", false },
                 { "JHMY", "JHMYY", false },
+                { "bBccC", "BBC", true },
+                { "ABhellHELLO", "ABHELLO", true },
         };
     }
 
