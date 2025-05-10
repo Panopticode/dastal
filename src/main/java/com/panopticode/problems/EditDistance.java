@@ -1,4 +1,4 @@
-package com.panopticode.problems.hackerrank.dynamicprogramming;
+package com.panopticode.problems;
 
 public class EditDistance {
     /**
