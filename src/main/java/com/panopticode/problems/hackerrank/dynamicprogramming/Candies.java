@@ -1,5 +1,6 @@
 package com.panopticode.problems.hackerrank.dynamicprogramming;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +29,37 @@ public class Candies {
      */
 
     public static long candies(int n, List<Integer> arr) {
-        // Write your code here
-        return 0L;
+        // Do a naive first pass left-to-right and then another pass right-to-left to adjust the values
+        var candies = new int[arr.size()];
+        candies[0] = 1;
+
+        // fist pass
+        for (int i = 1; i < arr.size(); ++i) {
+            if (arr.get(i) > arr.get(i - 1)) {
+                candies[i] = candies[i - 1] + 1;
+            } else {
+                candies[i] = 1;
+            }
+        }
+
+        // second pass
+        for (int i = arr.size() - 2; i >= 0; --i) {
+            switch (Integer.compare(arr.get(i), arr.get(i + 1))) {
+                case 1:
+                    candies[i] = Math.max(candies[i], candies[i + 1] + 1);
+                    break;
+                case 0:
+                    break;
+                case -1:
+                    if (candies[i + 1] > 1) {
+                        candies[i] = Math.min(candies[i], candies[i + 1] - 1);
+                    } else {
+                        candies[i] = 1;
+                    }
+                    break;
+            }
+        }
+
+        return Arrays.stream(candies).asLongStream().sum();
     }
 }
