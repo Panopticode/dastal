@@ -32,7 +32,7 @@ package com.panopticode.problems.leetcode;
  *
  * Input: queryIP = "256.256.256.256"
  * Output: "Neither"
- * Explanation: This is neither a IPv4 address nor a IPv6 address.
+ * Explanation: This is neither an IPv4 address nor an IPv6 address.
  *
  * Constraints:
  *
@@ -40,6 +40,91 @@ package com.panopticode.problems.leetcode;
  */
 public class ValidateIPAddress {
     public String validIPAddress(String queryIP) {
-        return null;
+        if (isValidIPv4(queryIP)) {
+            return "IPv4";
+        }
+        else if (isValidIPv6(queryIP)) {
+            return "IPv6";
+        }
+        else {
+            return "Neither";
+        }
+    }
+
+    private boolean isValidIPv4(final String queryIP) {
+        // explicit check for trailing empty strings
+        if (queryIP.endsWith(".")) {
+            return false;
+        }
+        var parts = queryIP.split("\\.");
+
+        if (parts.length != 4) {
+            return false;
+        }
+
+        for (var p : parts) {
+            if (!isValidIPv4Part(p)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isValidIPv4Part(final String part) {
+        // check for leading zeroes
+        if (part.length() > 1 && part.startsWith("0")) {
+            return false;
+        }
+
+        try {
+            var p = Integer.parseInt(part);
+
+            if (p < 0 || p > 255) {
+                return false;
+            }
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidIPv6(final String queryIP) {
+        // explicit check for trailing empty strings
+        if (queryIP.endsWith(":")) {
+            return false;
+        }
+        var parts = queryIP.split(":");
+
+        if (parts.length != 8) {
+            return false;
+        }
+
+        for (var p : parts) {
+            if (!isValidIPv6Part(p)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isValidIPv6Part(final String part) {
+        if (part.isEmpty() || part.length() > 4) {
+            return false;
+        }
+
+        for (var c : part.toLowerCase().toCharArray()) {
+            var isDigit = c >= '0' && c <= '9';
+            var isAlphaHex = c >= 'a' && c <= 'f';
+
+            if (!isDigit && !isAlphaHex) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
