@@ -37,6 +37,12 @@ jacoco {
 tasks.named('test') {
     // Use TestNG for unit tests.
     useTestNG()
+    // set heap size for the test JVM(s)
+    minHeapSize = "128m"
+    maxHeapSize = "512m"
+
+    // set JVM arguments for the test JVM(s)
+    jvmArgs('-Xss512m')
     finalizedBy jacocoTestReport
 }
 
