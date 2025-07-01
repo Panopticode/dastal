@@ -18,6 +18,7 @@ repositories {
 dependencies {
     // Use TestNG framework, also requires calling test.useTestNG() below
     testImplementation libs.testng
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.3'
 
     // This dependency is used by the application.
     implementation libs.guava
